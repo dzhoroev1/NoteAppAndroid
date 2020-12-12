@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         logInEmail = (EditText) findViewById(R.id.loginID);
         logInPassword = (EditText) findViewById(R.id.loginPassword);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password = logInPassword.getText().toString().trim();
 
         if(email.isEmpty()){
-            logInEmail.setError("Emial is required!");
+            logInEmail.setError("Email is required!");
             logInEmail.requestFocus();
             return;
         }

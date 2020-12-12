@@ -8,4 +8,5 @@
     <string name="registerEmail">Email</string>
     <string name="registerPassword">Password</string>
     <string name="register">Register</string>
+    <string name="welcome_to_your_profile">Welcome to your profile</string>
 </resources>
