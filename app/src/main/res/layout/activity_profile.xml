@@ -7,7 +7,7 @@
     tools:context=".ProfileActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_your_profile"
@@ -16,6 +16,7 @@
         app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signOutButton" />
+
 
     <Button
         android:id="@+id/signOutButton"
