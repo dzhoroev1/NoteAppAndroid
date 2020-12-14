@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener  {
     private Button logOut;
-    private TextView userInformation;
+    private TextView userText;
     private FirebaseUser user;
     private DatabaseReference userData;
     private String userID;
@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
 
         logOut = (Button) findViewById(R.id.signOutButton);
-        userInformation = (TextView) findViewById(R.id.userInfo);
+        userText = (TextView) findViewById(R.id.userInfo);
 
         logOut.setOnClickListener(this);
 
@@ -42,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
                 String name = userProfile.name;
-                userInformation.setText("Welcome, " + name);
+                userText.setText("Welcome, " + name);
             }
 
             @Override
