@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener  {
-    private Button logOut;
+    private Button logOut, myNotes;
     private TextView userText;
     private FirebaseUser user;
     private DatabaseReference userData;
@@ -30,7 +30,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         logOut = (Button) findViewById(R.id.signOutButton);
         userText = (TextView) findViewById(R.id.userInfo);
+        myNotes= (Button) findViewById(R.id.notesButton);
 
+        myNotes.setOnClickListener(this);
         logOut.setOnClickListener(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -42,7 +44,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User userProfile = snapshot.getValue(User.class);
                 String name = userProfile.name;
-                userText.setText("Welcome, " + name);
+                String email = userProfile.email;
+                userText.setText("Welcome, " + name+" "+email);
             }
 
             @Override
@@ -58,6 +61,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.signOutButton:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.notesButton:
+                startActivity(new Intent(this,note_taking.class));
                 break;
         }
 

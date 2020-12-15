@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteApp">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity
+            android:name=".note_taking"
+            android:label="@string/title_activity_note_taking"
+            android:theme="@style/Theme.NoteApp.NoActionBar"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".MainActivity">
             <intent-filter>
