@@ -11,8 +11,7 @@
         android:theme="@style/Theme.NoteApp">
         <activity
             android:name=".note_taking"
-            android:label="@string/title_activity_note_taking"
-            android:theme="@style/Theme.NoteApp.NoActionBar"></activity>
+            android:theme="@style/Theme.NoteApp.NoActionBar" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterUser" />
         <activity android:name=".MainActivity">
