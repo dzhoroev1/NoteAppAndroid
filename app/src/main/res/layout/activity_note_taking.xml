@@ -26,13 +26,14 @@
 
     <include layout="@layout/content_scrolling" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <Button
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
+        android:text="@string/savebutton"
+        android:backgroundTint="@color/purple_200"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:layout_anchorGravity="bottom|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
