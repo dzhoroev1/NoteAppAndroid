@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,7 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
     private EditText noteText;
     private Button saveButton;
     private FirebaseFirestore db;
-    private DatabaseReference dbRef;
+    private DatabaseReference dbNoteRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +44,46 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
 
-       String notesId =  db.collection("notes").getId();
+//       String notesId =  db.collection("notes").getId();
+//
+//        dbRef.child(notesId).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Note note = (Note) snapshot.getValue();
+//                String text;
+//                if (null != note.getNote()){
+//                    text = note.getNote().toString().trim();
+//                }else{
+//                    text = "Please write note here ...";
+//                }
+//                noteText.setText(text);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
-        dbRef.child(notesId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Note note = (Note) snapshot.getValue();
-                String text;
-                if (null != note.getNote()){
-                    text = note.getNote().toString().trim();
-                }else{
-                    text = "Please write note here ...";
-                }
-                noteText.setText(text);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        dbNoteRef.child("notes").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Note note = (Note) snapshot.getValue();
+//                String text;
+//                if (null != note.getNote()){
+//                    text = note.getNote().toString().trim();
+//                }else{
+//                    text = "Please write note here ...";
+//                }
+//                noteText.setText(text);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
 
