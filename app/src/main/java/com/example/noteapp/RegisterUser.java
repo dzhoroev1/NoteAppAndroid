@@ -21,7 +21,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
     private Button registerButton,homeButton;
     private FirebaseAuth mAuth;
-    private EditText fullName, registerEmail, registerPassword;
+    private EditText fullName, registerEmail, registerPassword,noteDef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         fullName = (EditText) findViewById(R.id.registrationName);
         registerEmail = (EditText) findViewById(R.id.registrationEmail);
         registerPassword = (EditText) findViewById(R.id.registrationPassword);
-
+        noteDef = (EditText) findViewById(R.id.noteDefault);
 
     }
 
@@ -58,6 +58,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String email = registerEmail.getText().toString().trim();
         String name = fullName.getText().toString().trim();
         String password = registerPassword.getText().toString().trim();
+        String note_def = noteDef.getText().toString().trim();
 
         if (email.isEmpty()){
             registerEmail.setError("Email is required!");
@@ -90,6 +91,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             User user = new User(name,email);
+                            Note note = new Note(note_def);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -100,6 +102,14 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                         Toast.makeText(RegisterUser.this,"User has been registered successfully!",Toast.LENGTH_LONG).show();;
                                     }else
                                         Toast.makeText(RegisterUser.this, "Failed to register!",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            FirebaseDatabase.getInstance().getReference("Notes")
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .setValue(note).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
                                 }
                             });
                         }else{

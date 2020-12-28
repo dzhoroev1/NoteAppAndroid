@@ -17,4 +17,5 @@
     <string name="action_settings">Settings</string>
     <string name="my_notes">MyNotes</string>
     <string name="savebutton">SAVE</string>
+    <string name="note_default">Note Default</string>
 </resources>

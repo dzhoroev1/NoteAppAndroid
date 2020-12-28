@@ -7,6 +7,21 @@
     tools:context=".RegisterUser">
 
     <EditText
+        android:id="@+id/noteDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="136dp"
+        android:ems="10"
+        android:hint="@string/note_default"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@+id/registrationName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
         android:id="@+id/registrationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

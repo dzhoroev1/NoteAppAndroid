@@ -33,7 +33,10 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
     private EditText noteText;
     private Button saveButton;
     private FirebaseFirestore db;
-    private DatabaseReference dbNoteRef;
+    private DatabaseReference userNote;
+    private FirebaseUser user;
+    private String userID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,46 +47,23 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
 
-//       String notesId =  db.collection("notes").getId();
-//
-//        dbRef.child(notesId).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Note note = (Note) snapshot.getValue();
-//                String text;
-//                if (null != note.getNote()){
-//                    text = note.getNote().toString().trim();
-//                }else{
-//                    text = "Please write note here ...";
-//                }
-//                noteText.setText(text);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userNote = FirebaseDatabase.getInstance().getReference("Notes");
+        userID = user.getUid();
 
-//        dbNoteRef.child("notes").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Note note = (Note) snapshot.getValue();
-//                String text;
-//                if (null != note.getNote()){
-//                    text = note.getNote().toString().trim();
-//                }else{
-//                    text = "Please write note here ...";
-//                }
-//                noteText.setText(text);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        userNote.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Note note = snapshot.getValue(Note.class);
+                String text_note = note.getNote();
+                noteText.setText(text_note);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
@@ -98,22 +78,16 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
     }
 
     private void saveText(){
-
-        this.db = FirebaseFirestore.getInstance();
-        String noteString = noteText.getText().toString().trim();
-        Note note = new Note(noteString);
-        db.collection("notes").add(note)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                @Override
-                                                public void onSuccess(DocumentReference documentReference) {
-                                                    Toast.makeText(note_taking.this,"Note Added",Toast.LENGTH_LONG).show();
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(note_taking.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
-                                                }
-                                            });
+        userNote.child(userID).child("note").setValue(noteText.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(note_taking.this,"Note Added",Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(note_taking.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
