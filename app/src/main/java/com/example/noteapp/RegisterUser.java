@@ -57,6 +57,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String email = registerEmail.getText().toString().trim();
         String name = fullName.getText().toString().trim();
         String password = registerPassword.getText().toString().trim();
+        String noteDefault = "Write your note here";
+        String titleDefault = "Write your title here";
 
         if (email.isEmpty()){
             registerEmail.setError("Email is required!");
@@ -89,7 +91,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             User user = new User(name,email);
-                            Note note = new Note("Write your note here");
+                            Note note = new Note(noteDefault,titleDefault);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

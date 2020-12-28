@@ -30,9 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class note_taking extends AppCompatActivity implements View.OnClickListener {
-    private EditText noteText;
+    private EditText noteText, titleText;
     private Button saveButton;
-    private FirebaseFirestore db;
     private DatabaseReference userNote;
     private FirebaseUser user;
     private String userID;
@@ -44,6 +43,8 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_note_taking);
 
         noteText = (EditText) findViewById(R.id.noteText);
+        titleText = (EditText) findViewById(R.id.titleOfNote);
+
         saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
 
@@ -56,7 +57,9 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Note note = snapshot.getValue(Note.class);
                 String text_note = note.getNote();
+                String title_note = note.getTitle();
                 noteText.setText(text_note);
+                titleText.setText(title_note);
             }
 
             @Override
@@ -78,6 +81,7 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
     }
 
     private void saveText(){
+        userNote.child(userID).child("title").setValue(titleText.getText().toString().trim());
         userNote.child(userID).child("note").setValue(noteText.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
