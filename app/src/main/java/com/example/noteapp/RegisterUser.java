@@ -89,6 +89,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             User user = new User(name,email);
+                            Note note = new Note("Write your note here");
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -99,6 +100,14 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                         Toast.makeText(RegisterUser.this,"User has been registered successfully!",Toast.LENGTH_LONG).show();;
                                     }else
                                         Toast.makeText(RegisterUser.this, "Failed to register!",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            FirebaseDatabase.getInstance().getReference("Notes")
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .setValue(note).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
                                 }
                             });
                         }else{
