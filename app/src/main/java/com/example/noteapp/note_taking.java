@@ -1,5 +1,6 @@
 package com.example.noteapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -76,6 +77,7 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()){
             case R.id.saveButton:
                 saveText();
+                startActivity(new Intent(this,ProfileActivity.class));
                 break;
         }
     }

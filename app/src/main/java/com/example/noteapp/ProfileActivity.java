@@ -21,7 +21,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button logOut, myNotes;
     private TextView userText;
     private FirebaseUser user;
-    private DatabaseReference userData;
+    private DatabaseReference userData,noteData;
     private String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userData = FirebaseDatabase.getInstance().getReference("Users");
+        noteData = FirebaseDatabase.getInstance().getReference("Notes");
         userID = user.getUid();
 
         userData.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -45,7 +46,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 User userProfile = snapshot.getValue(User.class);
                 String name = userProfile.name;
                 String email = userProfile.email;
+
                 userText.setText("Welcome, " + name+" "+email);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        noteData.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Note note = snapshot.getValue(Note.class);
+                String title = note.getTitle();
+                myNotes.setText(title);
             }
 
             @Override

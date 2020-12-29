@@ -8,11 +8,5 @@
     tools:context=".note_taking"
     tools:showIn="@layout/activity_note_taking">
 
-    <EditText
-        android:id="@+id/noteText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationY="120dp"
-        android:layout_margin="@dimen/text_margin"/>
 
 </androidx.core.widget.NestedScrollView>

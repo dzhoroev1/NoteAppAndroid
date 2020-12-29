@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,21 +8,42 @@
     android:fitsSystemWindows="true"
     tools:context=".note_taking">
 
-    <EditText
-        android:id="@+id/titleOfNote"
+    <ScrollView
         android:layout_width="match_parent"
-        android:hint="Write Title here"
-        android:layout_height="80dp" />
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:backgroundTint="@color/purple_200"
-        android:text="@string/savebutton"
-        android:translationY="80dp"/>
+        android:layout_height="match_parent"
+        app:layout_editor_absoluteX="8dp"
+        app:layout_editor_absoluteY="8dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/titleOfNote"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:hint="@string/write_your_title_here"
+                android:textSize="12pt"/>
 
-    <include
-        layout="@layout/content_scrolling"/>
+            <EditText
+                android:id="@+id/noteText"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:hint="@string/write_your_note_here"
+                android:textSize="8pt"/>
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:backgroundTint="@color/teal_200"
+                android:text="@string/save"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

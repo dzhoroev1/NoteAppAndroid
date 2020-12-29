@@ -108,4 +108,8 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="write_title_here">Write Title here</string>
+    <string name="write_your_title_here">Write your title here...</string>
+    <string name="save">SAVE</string>
+    <string name="write_your_note_here">Write your note here ....</string>
 </resources>
