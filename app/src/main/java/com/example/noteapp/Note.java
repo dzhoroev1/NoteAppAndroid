@@ -2,6 +2,7 @@ package com.example.noteapp;
 
 public class Note {
     private String note,title;
+    int numOfNote;
     public Note(){
 
     }
