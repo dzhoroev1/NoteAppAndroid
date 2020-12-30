@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener  {
-    private Button logOut, myNotes;
+    private Button logOut, myNotes, addNote;
     private TextView userText;
     private FirebaseUser user;
     private DatabaseReference userData,noteData;

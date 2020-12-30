@@ -112,4 +112,6 @@
     <string name="write_your_title_here">Write your title here...</string>
     <string name="save">SAVE</string>
     <string name="write_your_note_here">Write your note here ....</string>
+    <string name="welcome">Welcome</string>
+    <string name="add_note">Add note</string>
 </resources>
