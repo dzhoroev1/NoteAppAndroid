@@ -3,9 +3,11 @@ package com.example.noteapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText logInEmail, logInPassword;
     private FirebaseAuth mAuth;
     private CheckBox rememberMe;
+    private Boolean saveUser = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
 
         rememberMe=(CheckBox) findViewById(R.id.rememberMe);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("email",MODE_PRIVATE);
+        SharedPreferences sharedPreferences1 = getSharedPreferences("password",MODE_PRIVATE);
+
+        String emailD,passwordD,save;
+        emailD = sharedPreferences.getString("email","");
+        save = sharedPreferences.getString("saved", "").trim();
+        passwordD =sharedPreferences1.getString("password","");
+
+        Log.d("status:   ", save.trim());
+        rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()){
+                    saveUser = true;
+                    Toast.makeText(MainActivity.this,"Checked", Toast.LENGTH_LONG);
+                    Log.d("checked",": +");
+
+                } else {
+                    saveUser = false;
+                    Toast.makeText(MainActivity.this,"Unchecked", Toast.LENGTH_LONG);
+                    Log.d("checked",": -");
+                }
+            }
+        });
+
+        if(save.equals("true")) {
+            Log.d("status:   ", "hello tima");
+            mAuth.signInWithEmailAndPassword(emailD, passwordD).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    } else {
+                        Toast.makeText(MainActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
 
     }
 
@@ -76,6 +119,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             logInPassword.setError("Password should be longer than 6");
             logInPassword.requestFocus();
             return;
+        }
+
+        if (saveUser){
+            SharedPreferences preferences = getSharedPreferences("email",MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("email", email);
+            editor.putString("saved","true");
+            editor.apply();
+
+            SharedPreferences preferences1 = getSharedPreferences("password",MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = preferences1.edit();
+            editor1.putString("password",password);
+            editor1.apply();
+            Log.d("saved:  ", "true");
+        }else {
+            SharedPreferences preferences = getSharedPreferences("email",MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("email", "nothing");
+            editor.putString("saved","false");
+            editor.apply();
+            SharedPreferences preferences1 = getSharedPreferences("password",MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = preferences1.edit();
+            editor1.putString("password","nothing");
+            editor1.apply();
+
         }
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
