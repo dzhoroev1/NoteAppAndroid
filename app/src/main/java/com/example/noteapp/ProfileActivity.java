@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener  {
     private Button logOut, myNotes, addNote;
     private TextView userText;
@@ -27,6 +29,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private String userID;
     private LinearLayout myLayout;
     private int numberOfNotesInt;
+
+    private List<Note> listNote;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
