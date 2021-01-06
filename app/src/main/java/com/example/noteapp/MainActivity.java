@@ -47,13 +47,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         rememberMe=(CheckBox) findViewById(R.id.rememberMe);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("email",MODE_PRIVATE);
-        SharedPreferences sharedPreferences1 = getSharedPreferences("password",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("userInfo",MODE_PRIVATE);
 
         String emailD,passwordD,save;
         emailD = sharedPreferences.getString("email","");
         save = sharedPreferences.getString("saved", "").trim();
-        passwordD =sharedPreferences1.getString("password","");
+        passwordD =sharedPreferences.getString("password","");
 
         Log.d("status:   ", save.trim());
         rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -122,27 +121,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (saveUser){
-            SharedPreferences preferences = getSharedPreferences("email",MODE_PRIVATE);
+            SharedPreferences preferences = getSharedPreferences("userInfo",MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("email", email);
             editor.putString("saved","true");
+            editor.putString("password",password);
             editor.apply();
-
-            SharedPreferences preferences1 = getSharedPreferences("password",MODE_PRIVATE);
-            SharedPreferences.Editor editor1 = preferences1.edit();
-            editor1.putString("password",password);
-            editor1.apply();
-            Log.d("saved:  ", "true");
         }else {
-            SharedPreferences preferences = getSharedPreferences("email",MODE_PRIVATE);
+            SharedPreferences preferences = getSharedPreferences("userInfo",MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("email", "nothing");
             editor.putString("saved","false");
+            editor.putString("password","nothing");
             editor.apply();
-            SharedPreferences preferences1 = getSharedPreferences("password",MODE_PRIVATE);
-            SharedPreferences.Editor editor1 = preferences1.edit();
-            editor1.putString("password","nothing");
-            editor1.apply();
 
         }
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

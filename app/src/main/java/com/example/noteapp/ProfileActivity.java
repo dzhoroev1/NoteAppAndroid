@@ -135,14 +135,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
     private void deleteSaveUser(){
-        SharedPreferences preferences = getSharedPreferences("email",MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("userInfo",MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("email", "nothing");
+        editor.putString("password","nothing");
         editor.putString("saved","false");
         editor.apply();
-        SharedPreferences preferences1 = getSharedPreferences("password",MODE_PRIVATE);
-        SharedPreferences.Editor editor1 = preferences1.edit();
-        editor1.putString("password","nothing");
-        editor1.apply();
     }
 }
