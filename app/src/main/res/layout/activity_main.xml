@@ -6,105 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="3">
-
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="3">
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:fontFamily="cursive"
-            android:text="NoteApp"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/teal_700"
-            android:textSize="30pt" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:fontFamily="cursive"
+                android:text="NoteApp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/teal_700"
+                android:textSize="30pt" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"/>
+
+        </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="3"
+            android:paddingHorizontal="20dp">
+            <EditText
+                android:id="@+id/loginID"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email"
+                android:importantForAutofill="no"
+                android:layout_weight="1"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:weightSum="3"
-        android:paddingHorizontal="20dp">
-        <EditText
-            android:id="@+id/loginID"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="@string/email"
-            android:importantForAutofill="no"
-            android:layout_weight="1"/>
+            <EditText
+                android:id="@+id/loginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+                android:importantForAutofill="no"
+                android:layout_weight="1"/>
+            <CheckBox
+                android:id="@+id/rememberMe"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Remember me"
+                android:textColor="@color/teal_700"
+                android:textSize="7pt"
+                android:layout_weight="1"/>
 
-        <EditText
-            android:id="@+id/loginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="@string/password"
-            android:importantForAutofill="no"
-            android:layout_weight="1"/>
-        <CheckBox
-            android:id="@+id/rememberMe"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Remember me"
-            android:textColor="@color/teal_700"
-            android:textSize="7pt"
-            android:layout_weight="1"/>
+        </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="2"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp">
-        <Button
-            android:id="@+id/signInButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:backgroundTint="@color/teal_700"
-            android:text="@string/log_in"
-            android:layout_weight="0.5"/>
-
-        <Button
-            android:id="@+id/registrationButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="@string/sign_up"
-            android:textColor="@color/teal_700"
-            android:layout_weight="0.5"/>
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+            <Button
+                android:id="@+id/signInButton"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:backgroundTint="@color/teal_700"
+                android:text="@string/log_in"
+                android:layout_weight="0.5"/>
 
+            <Button
+
+                android:id="@+id/registrationButton"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:backgroundTint="#FFFFFF"
+                android:text="@string/sign_up"
+                android:textColor="@color/teal_700"
+                android:layout_weight="0.5"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
 </LinearLayout>
