@@ -79,15 +79,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Note note = snapshot.getValue(Note.class);
                 String title1 = note.getTitle1();
-                noteButton1.setText("Note: " + title1);
+                noteButton1.setText(title1);
                 String title2 = note.getTitle2();
-                noteButton2.setText("Note: " + title2);
+                noteButton2.setText(title2);
                 String title3 = note.getTitle3();
-                noteButton3.setText("Note: " + title3);
+                noteButton3.setText(title3);
                 String title4 = note.getTitle4();
-                noteButton4.setText("Note: " + title4);
+                noteButton4.setText(title4);
                 String title5 = note.getTitle5();
-                noteButton5.setText("Note: " + title5);
+                noteButton5.setText(title5);
             }
 
             @Override
