@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -15,24 +12,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class note_taking extends AppCompatActivity implements View.OnClickListener {
-    private EditText noteText, titleText;
-    private Button saveButton;
+public class note_taking3 extends AppCompatActivity implements View.OnClickListener {
+    private EditText noteText3, titleText3;
+    private Button saveButton3;
     private DatabaseReference userNote;
     private FirebaseUser user;
     private String userID;
@@ -41,13 +32,13 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note_taking);
+        setContentView(R.layout.activity_note_taking3);
 
-        noteText = (EditText) findViewById(R.id.noteText);
-        titleText = (EditText) findViewById(R.id.titleOfNote);
+        noteText3 = (EditText) findViewById(R.id.noteText3);
+        titleText3 = (EditText) findViewById(R.id.titleOfNote3);
 
-        saveButton = (Button) findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(this);
+        saveButton3 = (Button) findViewById(R.id.saveButton3);
+        saveButton3.setOnClickListener(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userNote = FirebaseDatabase.getInstance().getReference("Notes");
@@ -57,10 +48,10 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Note note = snapshot.getValue(Note.class);
-                String text_note = note.getNote1();
-                String title_note = note.getTitle1();
-                noteText.setText(text_note);
-                titleText.setText(title_note);
+                String text_note = note.getNote3();
+                String title_note = note.getTitle3();
+                noteText3.setText(text_note);
+                titleText3.setText(title_note);
             }
 
             @Override
@@ -75,24 +66,24 @@ public class note_taking extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.saveButton:
+            case R.id.saveButton3:
                 saveText();
-                startActivity(new Intent(this,ProfileActivity.class));
+                startActivity(new Intent(note_taking3.this,ProfileActivity.class));
                 break;
         }
     }
 
     private void saveText(){
-        userNote.child(userID).child("title1").setValue(titleText.getText().toString().trim());
-        userNote.child(userID).child("note1").setValue(noteText.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<Void>() {
+        userNote.child(userID).child("title3").setValue(titleText3.getText().toString().trim());
+        userNote.child(userID).child("note3").setValue(noteText3.getText().toString().trim()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(note_taking.this,"Note Added",Toast.LENGTH_LONG).show();
+                Toast.makeText(note_taking3.this,"Note Added",Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(note_taking.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
+                Toast.makeText(note_taking3.this,"Something Went Wrong",Toast.LENGTH_LONG).show();
             }
         });
     }

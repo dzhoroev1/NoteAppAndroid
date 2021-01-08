@@ -92,7 +92,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             User user = new User(name,email,1);
-                            Note note = new Note(noteDefault,titleDefault);
+                            Note note = new Note(noteDefault,titleDefault,noteDefault,titleDefault,noteDefault,titleDefault,noteDefault,titleDefault,noteDefault,titleDefault);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -101,6 +101,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(RegisterUser.this,"User has been registered successfully!",Toast.LENGTH_LONG).show();;
+                                        startActivity(new Intent(RegisterUser.this,MainActivity.class));
                                     }else
                                         Toast.makeText(RegisterUser.this, "Failed to register!",Toast.LENGTH_LONG).show();
                                 }

@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener  {
-    private Button logOut, myNotes, addNote;
+    private Button logOut, noteButton1,noteButton2,noteButton3,noteButton4,noteButton5;
     private TextView userText;
     private FirebaseUser user;
     private DatabaseReference userData,noteData;
@@ -39,14 +39,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         userText = (TextView) findViewById(R.id.userInfo);
 
         logOut = (Button) findViewById(R.id.signOutButton);
-        myNotes= (Button) findViewById(R.id.notesButton);
-        addNote = (Button) findViewById(R.id.addNote);
+        noteButton1 = (Button) findViewById(R.id.note1Button);
+        noteButton2 = (Button) findViewById(R.id.note2Button);
+        noteButton3 = (Button) findViewById(R.id.note3Button);
+        noteButton4 = (Button) findViewById(R.id.note4Button);
+        noteButton5 = (Button) findViewById(R.id.note5Button);
 
-        myLayout = (LinearLayout) findViewById(R.id.addNoteBox);
 
-        myNotes.setOnClickListener(this);
+        noteButton1.setOnClickListener(this);
+        noteButton2.setOnClickListener(this);
+        noteButton3.setOnClickListener(this);
+        noteButton4.setOnClickListener(this);
+        noteButton5.setOnClickListener(this);
+
         logOut.setOnClickListener(this);
-        addNote.setOnClickListener(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userData = FirebaseDatabase.getInstance().getReference("Users");
@@ -60,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 String name = userProfile.name;
                 String email = userProfile.email;
                 numberOfNotesInt = userProfile.getNumberOfNotes();
-                userText.setText("Welcome, " + name+" "+email + "\n numOFNotes: "+numberOfNotesInt);
+                userText.setText("Welcome, \n" + name);
             }
 
             @Override
@@ -72,8 +78,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Note note = snapshot.getValue(Note.class);
-                String title = note.getTitle();
-                myNotes.setText("Note: " + title);
+                String title1 = note.getTitle1();
+                noteButton1.setText("Note: " + title1);
+                String title2 = note.getTitle2();
+                noteButton2.setText("Note: " + title2);
+                String title3 = note.getTitle3();
+                noteButton3.setText("Note: " + title3);
+                String title4 = note.getTitle4();
+                noteButton4.setText("Note: " + title4);
+                String title5 = note.getTitle5();
+                noteButton5.setText("Note: " + title5);
             }
 
             @Override
@@ -81,8 +95,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
-
-        createNotesButtons();
 
     }
 
@@ -94,51 +106,26 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 deleteSaveUser();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-            case R.id.notesButton:
+            case R.id.note1Button:
                 startActivity(new Intent(this,note_taking.class));
                 break;
-            case R.id.addNote:
-                addNoteButton();
+            case R.id.note2Button:
+                startActivity(new Intent(this,note_taking2.class));
+                break;
+            case R.id.note3Button:
+                startActivity(new Intent(this,note_taking3.class));
+                break;
+            case R.id.note4Button:
+                startActivity(new Intent(this,note_taking4.class));
+                break;
+            case R.id.note5Button:
+                startActivity(new Intent(this,note_taking5.class));
                 break;
         }
 
     }
-    private void addNoteButton() {
 
-        Button newNoteButton = new Button(getApplicationContext());
-        newNoteButton.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        newNoteButton.setText("hi im new");
-        newNoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this, note_taking.class));
-            }
-        });
-        myLayout.addView(newNoteButton);
 
-    }
-    private void createNotesButtons(){
-        int count = 0;
-        while(count <= numberOfNotesInt){
-            Button newNoteButton = new Button(getApplicationContext());
-            newNoteButton.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            newNoteButton.setText("note #" + (count+1));
-            newNoteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(ProfileActivity.this, note_taking.class));
-                }
-            });
-            myLayout.addView(newNoteButton);
-            count++;
-        }
-    }
     private void deleteSaveUser(){
         SharedPreferences preferences = getSharedPreferences("userInfo",MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

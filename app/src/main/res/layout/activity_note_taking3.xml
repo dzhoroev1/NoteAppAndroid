@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".note_taking">
+    tools:context=".note_taking3">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,21 +18,21 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
             <EditText
-                android:id="@+id/titleOfNote"
+                android:id="@+id/titleOfNote3"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/write_your_title_here"
                 android:textSize="12pt"/>
 
             <EditText
-                android:id="@+id/noteText"
+                android:id="@+id/noteText3"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:hint="@string/write_your_note_here"
                 android:textSize="8pt"/>
 
             <Button
-                android:id="@+id/saveButton"
+                android:id="@+id/saveButton3"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:backgroundTint="@color/teal_200"
@@ -42,7 +40,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
